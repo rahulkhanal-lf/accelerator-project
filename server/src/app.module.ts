@@ -5,6 +5,7 @@ import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
 import { UsersModule } from './users/users.module.js';
 import { AuthModule } from './auth/auth.module.js';
+import { RedisModule } from './redis/redis.module.js';
 import { databaseConfig } from './config/database.config.js';
 
 @Module({
@@ -19,6 +20,7 @@ import { databaseConfig } from './config/database.config.js';
         ...config.get('database'),
       }),
     }),
+    RedisModule,
     UsersModule,
     AuthModule,
   ],

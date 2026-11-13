@@ -30,4 +30,8 @@ export class UsersService {
     if (!userWithHash) return false;
     return bcrypt.compare(password, userWithHash.passwordHash);
   }
+
+  async updateLastLogin(id: string): Promise<void> {
+    await this.usersRepo.update(id, { lastLoginAt: new Date() });
+  }
 }
