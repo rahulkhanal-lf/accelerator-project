@@ -199,7 +199,7 @@ cp server/.env.example server/.env
 |---|---|---|
 | `PORT` | `3000` | Port the NestJS server listens on |
 | `NODE_ENV` | `development` | `development` / `production` |
-| `DATABASE_URL` | `postgresql://postgres:password@localhost:5432/accelerator-project` | PostgreSQL connection string |
+| `DATABASE_URL` | `postgresql://postgres:password@localhost:5433/accelerator-project` | PostgreSQL connection string (Docker maps container 5432 → host 5433) |
 | `DATABASE_SSL` | `false` | Set `true` for SSL-enabled hosted databases |
 | `REDIS_URL` | `redis://localhost:6379` | Redis connection string |
 | `JWT_SECRET` | — | Long random string — **change before deploying** |
