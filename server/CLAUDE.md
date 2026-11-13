@@ -133,6 +133,50 @@ src/
 - Validate and sanitise all user input before it reaches the database.
 - Use parameterised queries / ORM methods — never string-concatenated SQL.
 
+## Database Rules — Migrations & Seeding
+
+**Never** write migration files by hand. **Never** call `typeorm` or `ts-node` directly. Always go through the pnpm scripts — they carry the correct flags and loader.
+
+### Migration commands (run from `server/`)
+
+```bash
+# After changing an entity — PascalCase name describing the change
+pnpm migration:generate src/database/migrations/<MigrationName>
+
+# Apply all pending migrations
+pnpm migration:run
+
+# Revert the last migration
+pnpm migration:revert
+
+# Show migration status
+pnpm migration:show
+```
+
+**Flow for every entity change:**
+1. Edit the entity in `src/**/*.entity.ts`
+2. Run `pnpm migration:generate src/database/migrations/<Name>`
+3. Read the generated file — confirm `up()` and `down()` are correct
+4. Run `pnpm migration:run`
+
+### Seeding commands (run from `server/`)
+
+```bash
+pnpm seed:users   # seeds 15 Nepali-name users (idempotent)
+```
+
+To add a new seeder:
+1. Create `src/database/seeds/<name>.seed.ts` — follow the `users.seed.ts` pattern
+2. Add `"seed:<name>": "node --loader ts-node/esm src/database/seeds/<name>.seed.ts"` to `package.json`
+3. Run `pnpm seed:<name>`
+
+### Hard rules
+- `synchronize: false` always — never enable auto-sync in any environment
+- Never edit a migration file after it has been run
+- Never call `npx typeorm` or `ts-node` directly
+- Never commit a migration that has not been run and verified locally
+- Never use dev seed scripts against a production database
+
 ## What Not To Do
 
 - No business logic in controllers.
