@@ -14,7 +14,7 @@ export enum UserStatus {
 }
 
 @Entity('users')
-export class User {
+export class UserEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

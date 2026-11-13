@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import * as bcrypt from 'bcrypt';
-import { User, UserStatus } from '../../users/entities/user.entity.js';
+import { UserEntity, UserStatus } from '../../users/entities/user.entity.js';
 import { AppDataSource } from '../data-source.js';
 
 const dataSource = AppDataSource;
@@ -29,7 +29,7 @@ const USERS: Array<{
 
 async function seed() {
   await dataSource.initialize();
-  const repo = dataSource.getRepository(User);
+  const repo = dataSource.getRepository(UserEntity);
 
   const passwordHash = await bcrypt.hash('Password@123', 12);
 

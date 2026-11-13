@@ -6,7 +6,7 @@ import {
   MaxLength,
 } from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { UserStatus } from '../entities/user.entity.js';
+import { UserStatus } from '../entities/user.entity.js'; // UserStatus enum, not the entity class
 
 export class UpdateUserDto {
   @ApiPropertyOptional()
