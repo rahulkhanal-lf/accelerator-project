@@ -5,7 +5,7 @@ import { AppDataSource } from '../data-source.js';
 
 const dataSource = AppDataSource;
 
-const NEPALI_USERS: Array<{
+const USERS: Array<{
   firstName: string;
   lastName: string;
   email: string;
@@ -36,7 +36,7 @@ async function seed() {
   let created = 0;
   let skipped = 0;
 
-  for (const data of NEPALI_USERS) {
+  for (const data of USERS) {
     const exists = await repo.findOneBy({ email: data.email });
     if (exists) { skipped++; continue; }
 
