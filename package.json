@@ -1,0 +1,19 @@
+{
+  "name": "accelerator-project",
+  "private": true,
+  "scripts": {
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "server/src/**/*.ts": [
+      "cd server && pnpm lint --fix-suggestions"
+    ],
+    "client/src/**/*.{ts,tsx}": [
+      "cd client && pnpm lint"
+    ]
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0"
+  }
+}

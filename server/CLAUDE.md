@@ -63,10 +63,11 @@ src/
 
 ## Validation
 
-- Use `StandardSchemaValidationPipe` with Standard Schema libraries (Zod preferred).
-- Define schemas co-located with the DTO file: `create-user.schema.ts` next to `create-user.dto.ts`.
+- Use `class-validator` decorators on DTO classes; `class-transformer` for type coercion.
+- Global `ValidationPipe` is registered in `main.ts` with `whitelist: true`, `forbidNonWhitelisted: true`, and `transform: true`.
+- Define one DTO class per operation (`CreateUserDto`, `UpdateUserDto`); never reuse the same class for different operations.
 - Validate at the HTTP boundary only; never re-validate inside services.
-- Strip unknown fields; reject with `400` on schema failure.
+- Strip unknown fields (`whitelist: true`); reject with `400` on validation failure.
 
 ## Error Handling
 
