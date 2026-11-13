@@ -1,21 +1,9 @@
 import 'reflect-metadata';
-import { config } from 'dotenv';
-import { DataSource } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
 import { User, UserStatus } from '../../users/entities/user.entity.js';
+import { AppDataSource } from '../data-source.js';
 
-config();
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
-const dataSource = new DataSource({
-  type: 'postgres',
-  url: process.env.DATABASE_URL,
-  entities: [join(__dirname, '../../**/*.entity.ts')],
-  synchronize: false,
-});
+const dataSource = AppDataSource;
 
 const NEPALI_USERS: Array<{
   firstName: string;
